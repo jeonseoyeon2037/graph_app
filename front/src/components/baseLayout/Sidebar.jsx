@@ -8,6 +8,7 @@ import { MENU_LISTS, routes } from '../../constants/menuLists';
 
 const Sidebar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+
   const dispatch = useDispatch();
 
   const [currentMenu, setCurrentMenu] = useState(0);
@@ -29,11 +30,11 @@ const Sidebar = () => {
           <span className="brand-logo bg-blue-700 rounded-md w-8 h-8 flex place-content-center">
             <img src={Icons.LogoWhite} alt="logo" className="w-5" />
           </span>
-          <span>Marshall</span>
+          <span>Marshall-{isSidebarOpen}</span>
         </div>
         <button
           className="sidebar-close text-black p-[0.125rem] rounded-sm bg-white cursor-pointer hover:bg-gray-300 lg:hidden"
-          onClick={() => {dispatch(setSidebarClose()); alert();}}
+          onClick={() => { dispatch(setSidebarClose()); }}
         >
           <MdOutlineClose />
         </button>
