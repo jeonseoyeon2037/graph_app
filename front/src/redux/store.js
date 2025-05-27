@@ -4,6 +4,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
 import sidebarReducer from './slices/sidebarSlice';
 import apiReducer from './slices/apiSlice';
+
 const store = configureStore({
   reducer: combineReducers({
     sidebar: sidebarReducer,

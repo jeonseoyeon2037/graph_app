@@ -9,7 +9,7 @@
 // 리듀서를 생성해주는 기능은 없기 때문에 액션들을 처리할 로직을 직접 작성해야 한다.
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { GET_VISITORS_API_URL, GET_REVENUE_API_URL, GET_CUSTOMERS_API_URL, GET_TARGET_REALITY_API_URL } from '../../constants/apiUrls';
+import { GET_VISITORS_API_URL, GET_REVENUE_API_URL, GET_CUSTOMERS_API_URL, GET_TARGET_REALITY_API_URL, GET_TOP_PRODUCTS_API_URL, GET_SALES_MAP_API_URL, GET_VOLUME_SERVICES_API_URL } from '../../constants/apiUrls';
 import { getRequest } from '../../constants/methods';
 
 // 공통된 비동기 액션 생성 함수
@@ -43,6 +43,23 @@ export const fetchTargetReality = createFetchThunk(
   GET_TARGET_REALITY_API_URL
 );
 
+// GET Top Products data
+export const fetchTopProducts = createFetchThunk(
+  'fetchTopProducts', // action type
+  GET_TOP_PRODUCTS_API_URL
+);
+
+// GET Sales Map data
+export const fetchSalesMap = createFetchThunk(
+  'fetchSalesMap', // action type
+  GET_SALES_MAP_API_URL
+);
+
+// GET Volume Services data
+export const fetchVolumeServices = createFetchThunk(
+  'fetchVolumeServices', // action type
+  GET_VOLUME_SERVICES_API_URL
+);
 
 // 요청 성공 시 함수 정의
 const handleFullfilled = (stateKey) => (state, action) => {
@@ -62,6 +79,9 @@ const apiSlice = createSlice({
     revenueData: null,
     customersData: null,
     targetRealityData: null,
+    topProductsData: null,
+    salesMapData: null,
+    volumeServicesData: null,
   },
   extraReducers: (builder) => {
     builder
@@ -72,7 +92,13 @@ const apiSlice = createSlice({
       .addCase(fetchCustomers.fulfilled, handleFullfilled('customersData')) // 요청 성공 시
       .addCase(fetchCustomers.rejected, handleRejected) // 요청 실패 시
       .addCase(fetchTargetReality.fulfilled, handleFullfilled('targetRealityData')) // 요청 성공 시
-      .addCase(fetchTargetReality.rejected, handleRejected); // 요청 실패 시
+      .addCase(fetchTargetReality.rejected, handleRejected) // 요청 실패 시
+      .addCase(fetchTopProducts.fulfilled, handleFullfilled('topProductsData')) // 요청 성공 시
+      .addCase(fetchTopProducts.rejected, handleRejected) // 요청 실패 시
+      .addCase(fetchSalesMap.fulfilled, handleFullfilled('salesMapData')) // 요청 성공 시 
+      .addCase(fetchSalesMap.rejected, handleRejected) // 요청 실패 시
+      .addCase(fetchVolumeServices.fulfilled, handleFullfilled('volumeServicesData')) // 요청 성공 시
+      .addCase(fetchVolumeServices.rejected, handleRejected); // 요청 실패 시
   },
 });
 
